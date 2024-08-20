@@ -5,6 +5,15 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property mixed $id
+ * @property mixed $full_name
+ * @property mixed $email
+ * @property mixed $activated
+ * @property mixed $created_at
+ * @property mixed $updated_at
+ */
+
 class StoreUserRessource extends JsonResource
 {
     /**
@@ -14,9 +23,7 @@ class StoreUserRessource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if($this->activated == null):
-            $default = 'active';
-        endif;
+        $default = 'active';
 
         return [
             'id'        => $this->id,

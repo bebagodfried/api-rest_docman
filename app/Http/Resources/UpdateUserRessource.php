@@ -5,6 +5,15 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property mixed $id
+ * @property mixed $full_name
+ * @property mixed $email
+ * @property mixed $activated
+ * @property mixed $created_at
+ * @property mixed $updated_at
+ */
+
 class UpdateUserRessource extends JsonResource
 {
     /**
@@ -14,9 +23,9 @@ class UpdateUserRessource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if($this->activated == true):
+        if($this->activated):
             $status = 'active';
-        elseif ($this->activated == false):
+        else:
             $status = 'not active';
         endif;
 

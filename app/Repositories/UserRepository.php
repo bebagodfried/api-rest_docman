@@ -2,23 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\UserRequests\LoginUserRequest;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
-use http\Env\Request;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 
 class UserRepository implements UserRepositoryInterface
 {
     protected User $model;
 
-    /**
-     * Create a new class instance.
-     */
     public function __construct(User $model)
     {
         $this->model = $model;
@@ -79,11 +71,6 @@ class UserRepository implements UserRepositoryInterface
         endif;
 
         return $user;
-    }
-
-    public function logout($id)
-    {
-        // TODO: Implement logout() method.
     }
 
     public function enable($id): ?User

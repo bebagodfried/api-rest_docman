@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Api\v1\UserControllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserRessource;
 use App\UseCases\UserUseCases\GetUsersUseCase;
 use Illuminate\Http\JsonResponse;
-use function PHPUnit\Framework\isEmpty;
 
 class GetUsersController extends Controller
 {
@@ -21,7 +19,7 @@ class GetUsersController extends Controller
         $users = $this->userService->execute();
 
         if($users):
-            return response()->json($users, 200);
+            return response()->json($users);
         else:
             return response()->json('Nothing here!');
         endif;

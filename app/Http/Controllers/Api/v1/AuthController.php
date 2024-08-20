@@ -23,15 +23,15 @@ class AuthController extends Controller
 
         if($token):
             $token = $token->createToken('API Token');
-            return response()->json(['token' => $token->plainTextToken ], 200);
+            return response()->json(['token' => $token->plainTextToken ]);
         else:
-            return response()->json('The provided credentials are incorrect.', 200);
+            return response()->json('The provided credentials are incorrect.');
         endif;
     }
 
     public function logout(Request $request): JsonResponse
     {
         $request->user()->currentAccessToken()->delete();
-        return response()->json('Successfully logged out', 200);
+        return response()->json('Successfully logged out');
     }
 }

@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Api\v1\UserControllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserRessource;
 use App\UseCases\UserUseCases\FindUserByIdUseCase;
-use App\UseCases\UserUseCases\GetUsersUseCase;
 use Illuminate\Http\JsonResponse;
-use function PHPUnit\Framework\isEmpty;
 
 class FindUserByIdController extends Controller
 {
@@ -22,7 +19,7 @@ class FindUserByIdController extends Controller
         $user = $this->userService->execute($id);
 
         if($user):
-            return response()->json($user, 200);
+            return response()->json($user);
         else:
             return response()->json("No user with id=$id here!");
         endif;

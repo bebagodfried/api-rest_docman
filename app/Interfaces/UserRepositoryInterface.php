@@ -2,9 +2,6 @@
 
 namespace App\Interfaces;
 
-use App\Http\Requests\UserRequests\LoginUserRequest;
-use Illuminate\Support\Facades\Request;
-
 interface UserRepositoryInterface
 {
     // CRUD
@@ -16,7 +13,6 @@ interface UserRepositoryInterface
 
     // Auth
     public function login(array $credentials);
-    public function logout($id);
 
     // Status
     public function enable($id);
