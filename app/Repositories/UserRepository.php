@@ -2,10 +2,15 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\UserRequests\LoginUserRequest;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
+use http\Env\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -64,13 +69,16 @@ class UserRepository implements UserRepositoryInterface
         return false;
     }
 
-    public function login(array $data): ?Authenticatable
+    public function login(array $credentials)
     {
-        if(auth()->attempt($data)):
-            return auth()->user();
+        $user = $this->model::query()
+            ->where('email', $credentials['email'])->first();
+
+        if(!$user || !Hash::check($credentials['password'], $user->password)):
+            return null;
         endif;
 
-        return null;
+        return $user;
     }
 
     public function logout($id)
