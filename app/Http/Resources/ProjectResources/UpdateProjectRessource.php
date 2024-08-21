@@ -24,19 +24,29 @@ class UpdateProjectRessource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if($this->archived):
+        $archived = $this->archived;
+
+        if($archived):
             $status = 'yes';
         else:
             $status = 'no';
         endif;
 
-        return [
+        $project = [
             'id'        => $this->id,
             'label'     => $this->label,
             'client'    => $this->client,
-            'start date'=> $this->start_date,
-            'end date'  => $this->end_date,
-            'archived'  => $status
+            'start_date'=> $this->start_date,
         ];
+
+        if($this->end_date):
+            $project['end_date'] = $this->end_date;
+        endif;
+
+        if($archived):
+            $project['archived'] = $status;
+        endif;
+
+        return $project;
     }
 }
