@@ -22,12 +22,17 @@ class StoreProjectRessource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
+        $project = [
             'id'        => $this->id,
             'label'     => $this->label,
             'client'    => $this->client,
             'start_date'=> $this->start_date,
-            'end_date'  => $this->end_date
         ];
+
+        if($this->end_date):
+            $project['end_date'] = $this->end_date;
+        endif;
+
+        return $project;
     }
 }
