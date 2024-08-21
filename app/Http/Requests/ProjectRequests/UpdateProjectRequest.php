@@ -25,7 +25,7 @@ class UpdateProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'label'     => 'sometimes|required|string|max:255',
+            'label'     => 'sometimes|required|string|max:255|unique:projects,label',
             'client'    => 'sometimes|required|string|max:255',
             'start_date'=> 'sometimes|required|date',
             'end_date'  => 'sometimes|required|date',

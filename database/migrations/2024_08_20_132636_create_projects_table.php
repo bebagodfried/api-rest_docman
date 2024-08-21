@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
 
-            $table->string('label');
+            $table->string('label')->unique();
             $table->string('client');
 
             $table->date('start_date');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('archived')->default(false);
 
             $table->foreignIdFor(User::class, 'author_id')
-                ->constrained('users', 'id')->onDelete('set null');
+                ->constrained('users')->onDelete('set null');
 
             $table->timestamps();
         });
