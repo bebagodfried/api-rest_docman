@@ -25,9 +25,9 @@ class UpdateProjectRessource extends JsonResource
     public function toArray(Request $request): array
     {
         if($this->archived):
-            $status = 'active';
+            $status = 'yes';
         else:
-            $status = 'not active';
+            $status = 'no';
         endif;
 
         return [
@@ -36,8 +36,7 @@ class UpdateProjectRessource extends JsonResource
             'client'    => $this->client,
             'start date'=> $this->start_date,
             'end date'  => $this->end_date,
-            'archived'  => $status,
-            'update at' => $this->updated_at
+            'archived'  => $status
         ];
     }
 }

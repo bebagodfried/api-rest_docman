@@ -22,7 +22,8 @@ return new class extends Migration
             $table->date('end_date')->nullable();
             $table->boolean('archived')->default(false);
 
-            $table->foreignIdFor(User::class, 'author_id')->constrained();
+            $table->foreignIdFor(User::class, 'author_id')
+                ->constrained('users', 'id')->onDelete('set null');
 
             $table->timestamps();
         });

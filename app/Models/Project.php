@@ -16,11 +16,12 @@ class Project extends Model
         'client',
         'start_date',
         'end_date',
-        'archived'
+        'archived',
+        'author_id'
     ];
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'author_id', 'id');
     }
 }

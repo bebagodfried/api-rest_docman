@@ -18,7 +18,10 @@ class StoreProjectController extends Controller
 
     public function store(StoreProjectRequest $request): JsonResponse
     {
-        $request= $request->validated();
+        $request                = $request->validated();
+        $request['end_date']    = $request['end_date'] ?? null;
+        $request['archived']    = $request['archived'] ?? false;
+
         $project   = $this->projectService->execute($request);
 
         if($project):

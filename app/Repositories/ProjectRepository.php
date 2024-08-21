@@ -34,7 +34,17 @@ class ProjectRepository implements ProjectRepositoryInterface
 
     public function create(array $request): Project
     {
-        return $this->model::query()->create($request);
+        $project            = new Project();
+        $project->label     = $request['label'];
+        $project->client    = $request['client'];
+        $project->start_date= $request['start_date'];
+        $project->end_date  = $request['end_date'];
+        $project->archived  = $request['archived'];
+
+        $project->author()->associate(auth()->user());
+        $project->save();
+
+        return $project;
     }
 
     public function update($id, array $request): ?Project
