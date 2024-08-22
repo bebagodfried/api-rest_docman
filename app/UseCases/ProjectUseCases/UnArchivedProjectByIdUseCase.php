@@ -4,7 +4,7 @@ namespace App\UseCases\ProjectUseCases;
 
 use App\Interfaces\ProjectRepositoryInterface;
 
-class UnarchivedProjectByIdUseCase
+class UnArchivedProjectByIdUseCase
 {
     protected ProjectRepositoryInterface $userRepository;
 

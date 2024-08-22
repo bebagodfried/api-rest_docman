@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\UserResources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -14,7 +14,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $updated_at
  */
 
-class StoreUserRessource extends JsonResource
+class UpdateUserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,14 +23,18 @@ class StoreUserRessource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $default = 'active';
+        if($this->activated):
+            $status = 'active';
+        else:
+            $status = 'not active';
+        endif;
 
         return [
             'id'        => $this->id,
             'full name' => $this->full_name,
             'email'     => $this->email,
-            'status'    => $this->activated ?? $default,
-            'created at'=> $this->created_at
+            'status'    => $status,
+            'update at' => $this->updated_at
         ];
     }
 }

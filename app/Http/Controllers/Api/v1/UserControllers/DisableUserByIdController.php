@@ -21,7 +21,7 @@ class DisableUserByIdController extends Controller
         if($user):
             return response()->json("User with id=$id deactivated successfully");
         else:
-            return response()->json("No user with id=$id here!");
+            return response()->json("No user with id=$id here!", 404);
         endif;
     }
 }

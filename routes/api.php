@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\Api\v1\AuthController;
 use App\Http\Controllers\Api\v1\ProjectControllers\ArchiveProjectByIdController;
 use App\Http\Controllers\Api\v1\ProjectControllers\DestroyProjectController;
 use App\Http\Controllers\Api\v1\ProjectControllers\FindProjectByIdController;
-use App\Http\Controllers\Api\v1\ProjectControllers\GetProjectAuthorByIdController;
+use App\Http\Controllers\Api\v1\ProjectControllers\GetArchivedProjectsController;
+use App\Http\Controllers\Api\v1\ProjectControllers\GetAuthorByProjectIdController;
 use App\Http\Controllers\Api\v1\ProjectControllers\GetProjectsController;
 use App\Http\Controllers\Api\v1\ProjectControllers\StoreProjectController;
-use App\Http\Controllers\Api\v1\ProjectControllers\UnarchivedProjectByIdController;
+use App\Http\Controllers\Api\v1\ProjectControllers\UnArchivedProjectByIdController;
 use App\Http\Controllers\Api\v1\ProjectControllers\UpdateProjectController;
+use App\Http\Controllers\Api\v1\UserControllers\Auth\AuthController;
 use App\Http\Controllers\Api\v1\UserControllers\DestroyUserController;
 use App\Http\Controllers\Api\v1\UserControllers\DisableUserByIdController;
 use App\Http\Controllers\Api\v1\UserControllers\EnableUserByIdController;
@@ -21,33 +22,40 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function ()
 {
-    Route::post('user/register',            [StoreUserController::class, 'store'])->name('register');
-    Route::post('user/login',               [AuthController::class, 'login'])->name('login');
-    Route::post('user/logout',              [AuthController::class, 'logout'])
-        ->middleware('auth:sanctum')->name('logout');
+    // auth
+    Route::middleware('guest')->prefix('users')->group(function (){
+        Route::post('/register',               [StoreUserController::class, 'register'])->name('register');
+        Route::post('/login',                  [AuthController::class, 'login'])->name('login');
+    });
 
     Route::middleware('auth:sanctum')->group(function (){
         // projects
-        Route::get('projects',                  [GetProjectsController::class, 'index']);
-        Route::post('projects',                 [StoreProjectController::class, 'store']);
+        Route::prefix('projects')->group(function () {
+            Route::get('/',                     [GetProjectsController::class, 'index'])->name('projects.index');
+            Route::post('/',                    [StoreProjectController::class, 'store'])->name('projects.store');
+            Route::get('/archived',             [GetArchivedProjectsController::class, 'getArchived'])->name('projects.archived');
 
-        Route::get('project/{id}',              [FindProjectByIdController::class, 'show'])->name('project.show');
-        Route::put('project/{id}',              [UpdateProjectController::class, 'update']);
-        Route::delete('project/{id}',           [DestroyProjectController::class, 'destroy']);
+            Route::get('/{id}',                 [FindProjectByIdController::class, 'show'])->name('project.show');
+            Route::put('/{id}',                 [UpdateProjectController::class, 'update'])->name('project.update');
+            Route::delete('/{id}',              [DestroyProjectController::class, 'destroy'])->name('project.destroy');
 
-        Route::get('project/{id}/author',       [GetProjectAuthorByIdController::class, 'getAuthor']);
-        Route::get('project/{id}/archive',      [ArchiveProjectByIdController::class, 'archive']);
-        Route::get('project/{id}/unarchived',   [UnarchivedProjectByIdController::class, 'unarchived']);
+            Route::get('/{id}/author',          [GetAuthorByProjectIdController::class, 'getAuthor'])->name('project.author');
+            Route::get('/{id}/archive',         [ArchiveProjectByIdController::class, 'archive'])->name('project.archive');
+            Route::get('/{id}/unarchived',      [UnarchivedProjectByIdController::class, 'unarchived'])->name('project.unarchived');
+        });
 
         // users
-        Route::get('users',                 [GetUsersController::class, 'index']);
+        Route::prefix('users')->group(function (){
+            Route::get('/',                     [GetUsersController::class, 'index'])->name('users.index');
 
-        Route::get('user/{id}',             [FindUserByIdController::class, 'show'])->name('author.show');
-        Route::put('user/{id}',             [UpdateUserController::class, 'update']);
-        Route::delete('user/{id}',          [DestroyUserController::class, 'destroy']);
+            Route::get('/{id}',                 [FindUserByIdController::class, 'show'])->name('author.show');
+            Route::put('/{id}',                 [UpdateUserController::class, 'update'])->name('author.update');
+            Route::delete('/{id}',              [DestroyUserController::class, 'destroy'])->name('author.destroy');
+            Route::delete('/{id}/logout',       [AuthController::class, 'logout'])->name('logout');
 
-        Route::get('user/{id}/projects',    [GetProjectsByUserIdController::class, 'getProjects']);
-        Route::get('user/{id}/activate',    [EnableUserByIdController::class, 'activate']);
-        Route::get('user/{id}/deactivate',  [DisableUserByIdController::class, 'deactivate']);
+            Route::get('/{id}/projects',        [GetProjectsByUserIdController::class, 'getProjects'])->name('author.projects');
+            Route::patch('/{id}/grant',         [EnableUserByIdController::class, 'activate'])->name('author.granted');
+            Route::patch('/{id}/revoke',        [DisableUserByIdController::class, 'deactivate'])->name('author.revoked');
+        });
     });
 });

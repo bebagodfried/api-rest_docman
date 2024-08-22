@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\ProjectResources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @property mixed $id
- * @property mixed $label
+ * @property mixed $full_name
+ * @property mixed $email
  */
-class GetProjectsByAuthorIdResource extends JsonResource
+class GetProjectAuthorResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,9 +20,9 @@ class GetProjectsByAuthorIdResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'project id'    => $this->id,
-            'label'         => $this->label,
-            'link'          => route('project.show', $this->id),
+            'full_name' => $this->full_name,
+            'email'     => $this->email,
+            'profile'   => route('author.show', $this->id),
         ];
     }
 }

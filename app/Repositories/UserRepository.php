@@ -40,7 +40,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function update($id, array $request): ?User
     {
-        $user = $this->model::query()->whereKey($id);
+        $user = $this->model::query()->find($id);
 
         if($user):
             $user->update($request);
@@ -96,6 +96,6 @@ class UserRepository implements UserRepositoryInterface
             return $user;
         endif;
 
-        return false;
+        return null;
     }
 }

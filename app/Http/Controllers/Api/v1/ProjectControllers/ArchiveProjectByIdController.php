@@ -20,7 +20,7 @@ class ArchiveProjectByIdController extends Controller
         if($project):
             return response()->json("Project with id=$id archived successfully");
         else:
-            return response()->json("No project with id=$id here!");
+            return response()->json("No project with id=$id here!", 404);
         endif;
     }
 }

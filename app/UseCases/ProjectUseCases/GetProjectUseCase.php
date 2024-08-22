@@ -2,7 +2,7 @@
 
 namespace App\UseCases\ProjectUseCases;
 
-use App\Http\Resources\ProjectResources\ProjectRessource;
+use App\Http\Resources\ProjectResources\GetProjectResource;
 use App\Interfaces\ProjectRepositoryInterface;
 
 class GetProjectUseCase
@@ -19,7 +19,7 @@ class GetProjectUseCase
         $projects = $this->projectRepository->all();
 
         if($projects->count() >> 0):
-            return ProjectRessource::collection($projects);
+            return GetProjectResource::collection($projects);
         else:
             return null;
         endif;

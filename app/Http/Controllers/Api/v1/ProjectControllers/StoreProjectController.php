@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\v1\ProjectControllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequests\StoreProjectRequest;
-use App\Http\Resources\ProjectResources\StoreProjectRessource;
+use App\Http\Resources\ProjectResources\StoreProjectResource;
 use App\UseCases\ProjectUseCases\StoreProjectUseCase;
 use Illuminate\Http\JsonResponse;
 
@@ -25,7 +25,7 @@ class StoreProjectController extends Controller
         $project   = $this->projectService->execute($request);
 
         if($project):
-            $project = new StoreProjectRessource($project);
+            $project = new StoreProjectResource($project);
             return response()->json($project);
         else:
             return response()->json('Something went wrong!', 500);

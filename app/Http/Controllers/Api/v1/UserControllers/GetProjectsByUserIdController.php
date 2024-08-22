@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\v1\UserControllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\GetProjectsByAuthorIdResource;
+use App\Http\Resources\UserResources\GetProjectsByAuthorIdResource;
 use App\UseCases\UserUseCases\GetProjectsByUserIdUseCase;
 use Illuminate\Http\JsonResponse;
 
@@ -19,11 +19,15 @@ class GetProjectsByUserIdController extends Controller
     {
         $projects = $this->projectService->execute($id);
 
-        if($projects):
+        if($projects !== null && $projects->count() > 0):
             $projects = GetProjectsByAuthorIdResource::collection($projects);
             return response()->json($projects);
+
+        elseif($projects !== null):
+            return response()->json("User with id=$id has no project!", 204);
+
         else:
-            return response()->json("No project with id=$id here!", 404);
+            return response()->json("Bad request no user with id=$id!", 400);
         endif;
     }
 }

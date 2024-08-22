@@ -2,7 +2,7 @@
 
 namespace App\UseCases\UserUseCases;
 
-use App\Http\Resources\UserRessource;
+use App\Http\Resources\UserResources\GetUserResource;
 use App\Interfaces\UserRepositoryInterface;
 
 class FindUserByIdUseCase
@@ -14,12 +14,12 @@ class FindUserByIdUseCase
         $this->userRepository = $userRepository;
     }
 
-    public function execute($id): ?UserRessource
+    public function execute($id): ?GetUserResource
     {
         $user = $this->userRepository->find($id);
 
         if($user):
-            return new UserRessource($user);
+            return new GetUserResource($user);
         else:
             return null;
         endif;

@@ -15,7 +15,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $updated_at
  */
 
-class StoreProjectRessource extends JsonResource
+class UpdateProjectResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -24,7 +24,9 @@ class StoreProjectRessource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if($this->archived):
+        $archived = $this->archived;
+
+        if($archived):
             $status = 'yes';
         else:
             $status = 'no';
@@ -37,13 +39,13 @@ class StoreProjectRessource extends JsonResource
             'start_date'=> $this->start_date,
         ];
 
-        // has end_date
         if($this->end_date):
             $project['end_date'] = $this->end_date;
         endif;
 
-        // is archived
-        $project['archived'] = $status;
+        if($archived):
+            $project['archived'] = $status;
+        endif;
 
         return $project;
     }

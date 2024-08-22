@@ -21,7 +21,7 @@ class FindUserByIdController extends Controller
         if($user):
             return response()->json($user);
         else:
-            return response()->json("No user with id=$id here!");
+            return response()->json("No user with id=$id here!", 404);
         endif;
     }
 }

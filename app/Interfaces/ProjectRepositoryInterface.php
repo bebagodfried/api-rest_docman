@@ -13,5 +13,5 @@ interface ProjectRepositoryInterface
 
     // Status
     public function archived($id);
-    public function unarchived($id);
+    public function unArchived($id);
 }

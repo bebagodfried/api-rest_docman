@@ -21,7 +21,7 @@ class GetProjectsController extends Controller
         if($projects):
             return response()->json($projects);
         else:
-            return response()->json('Nothing here!');
+            return response()->json('Nothing here!', 204);
         endif;
     }
 }

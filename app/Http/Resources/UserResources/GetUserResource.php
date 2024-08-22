@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\ProjectResources;
+namespace App\Http\Resources\UserResources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -9,8 +9,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $id
  * @property mixed $full_name
  * @property mixed $email
+ * @property mixed $activated
+ * @property mixed $created_at
+ * @property mixed $updated_at
  */
-class ProjectAuthorRessource extends JsonResource
+class GetUserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,9 +23,12 @@ class ProjectAuthorRessource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'full_name' => $this->full_name,
+            'id'        => $this->id,
+            'full name' => $this->full_name,
             'email'     => $this->email,
-            'profile'   => route('author.show', $this->id),
+            'is active' => ($this->activated ? 'yes' : 'no'),
+            'created at'=> $this->created_at,
+            'updated at'=> $this->updated_at
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\UseCases\ProjectUseCases;
 
-use App\Http\Resources\ProjectResources\ProjectRessource;
+use App\Http\Resources\ProjectResources\GetProjectResource;
 use App\Interfaces\ProjectRepositoryInterface;
 
 class FindProjectByIdUseCase
@@ -14,12 +14,12 @@ class FindProjectByIdUseCase
         $this->projectRepository = $projectRepository;
     }
 
-    public function execute($id): ?ProjectRessource
+    public function execute($id): ?GetProjectResource
     {
         $project = $this->projectRepository->find($id);
 
         if($project):
-            return new ProjectRessource($project);
+            return new GetProjectResource($project);
         else:
             return null;
         endif;

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\v1\UserControllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequests\StoreUserRequest;
-use App\Http\Resources\StoreUserRessource;
+use App\Http\Requests\UserRequests\Auth\RegisterRequest;
+use App\Http\Resources\UserResources\StoreUserResource;
 use App\UseCases\UserUseCases\StoreUserUseCase;
 use Illuminate\Http\JsonResponse;
 
@@ -16,13 +16,13 @@ class StoreUserController extends Controller
         $this->userService = $userService;
     }
 
-    public function store(StoreUserRequest $request): JsonResponse
+    public function register(RegisterRequest $request): JsonResponse
     {
         $request= $request->validated();
         $user   = $this->userService->execute($request);
 
         if($user):
-            $user = new StoreUserRessource($user);
+            $user = new StoreUserResource($user);
             return response()->json($user);
         else:
             return response()->json('Something went wrong!', 500);

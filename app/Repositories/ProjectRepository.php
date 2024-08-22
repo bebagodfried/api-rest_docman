@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Interfaces\ProjectRepositoryInterface;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProjectRepository implements ProjectRepositoryInterface
 {
@@ -50,7 +49,7 @@ class ProjectRepository implements ProjectRepositoryInterface
 
     public function update($id, array $request): ?Project
     {
-        $project = $this->model::query()->whereKey($id);
+        $project = $this->model::query()->find($id);
 
         if($project):
             $project->update($request);
@@ -84,7 +83,7 @@ class ProjectRepository implements ProjectRepositoryInterface
         return null;
     }
 
-    public function unarchived($id)
+    public function unArchived($id)
     {
         $project = $this->model::query()->find($id);
 
@@ -94,6 +93,6 @@ class ProjectRepository implements ProjectRepositoryInterface
             return $project;
         endif;
 
-        return false;
+        return null;
     }
 }

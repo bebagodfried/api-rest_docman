@@ -2,7 +2,7 @@
 
 namespace App\UseCases\UserUseCases;
 
-use App\Http\Resources\UserRessource;
+use App\Http\Resources\UserResources\GetUserResource;
 use App\Interfaces\UserRepositoryInterface;
 
 class GetUsersUseCase
@@ -19,7 +19,7 @@ class GetUsersUseCase
         $users = $this->userRepository->all();
 
         if($users->count() >> 0):
-            return UserRessource::collection($users);
+            return GetUserResource::collection($users);
         else:
             return null;
         endif;

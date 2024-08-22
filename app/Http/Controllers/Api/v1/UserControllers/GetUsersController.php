@@ -21,7 +21,7 @@ class GetUsersController extends Controller
         if($users):
             return response()->json($users);
         else:
-            return response()->json('Nothing here!');
+            return response()->json('Nothing here!', 204);
         endif;
     }
 }

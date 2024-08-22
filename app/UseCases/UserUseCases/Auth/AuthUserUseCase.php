@@ -1,10 +1,10 @@
 <?php
 
-namespace App\UseCases\UserUseCases;
+namespace App\UseCases\UserUseCases\Auth;
 
 use App\Interfaces\UserRepositoryInterface;
 
-class LoginUserUseCase
+class AuthUserUseCase
 {
     protected UserRepositoryInterface $userRepository;
 

@@ -12,10 +12,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $start_date
  * @property mixed $end_date
  * @property mixed $archived
+ * @property mixed $author
+ * @property mixed $created_at
  * @property mixed $updated_at
  */
 
-class UpdateProjectRessource extends JsonResource
+class GetProjectResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -24,29 +26,20 @@ class UpdateProjectRessource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $archived = $this->archived;
-
-        if($archived):
+        if($this->archived):
             $status = 'yes';
         else:
             $status = 'no';
         endif;
 
-        $project = [
+        return [
             'id'        => $this->id,
             'label'     => $this->label,
             'client'    => $this->client,
-            'start_date'=> $this->start_date,
+            'link'      => route('project.show', $this->id),
+            'archived'  => $status,
+            'timeline'  => new GetProjectDateResource($request),
+            'author'    => new GetProjectAuthorResource($this->author),
         ];
-
-        if($this->end_date):
-            $project['end_date'] = $this->end_date;
-        endif;
-
-        if($archived):
-            $project['archived'] = $status;
-        endif;
-
-        return $project;
     }
 }
