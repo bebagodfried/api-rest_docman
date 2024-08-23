@@ -38,7 +38,7 @@ class GetProjectResource extends JsonResource
             'client'    => $this->client,
             'link'      => route('project.show', $this->id),
             'archived'  => $status,
-            'timeline'  => new GetProjectDateResource($request),
+            'timeline'  => new GetProjectDateResource($this),
             'author'    => new GetProjectAuthorResource($this->author),
         ];
     }

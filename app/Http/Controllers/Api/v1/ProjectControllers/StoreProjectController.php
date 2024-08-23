@@ -26,7 +26,7 @@ class StoreProjectController extends Controller
 
         if($project):
             $project = new StoreProjectResource($project);
-            return response()->json($project);
+            return response()->json($project, 201);
         else:
             return response()->json('Something went wrong!', 500);
         endif;

@@ -30,7 +30,7 @@ class StoreUserResource extends JsonResource
             'full name' => $this->full_name,
             'email'     => $this->email,
             'status'    => $this->activated ?? $default,
-            'created at'=> $this->created_at
+            'created_at'=> $this->created_at
         ];
     }
 }

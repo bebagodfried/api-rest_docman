@@ -23,7 +23,7 @@ class StoreUserController extends Controller
 
         if($user):
             $user = new StoreUserResource($user);
-            return response()->json($user);
+            return response()->json($user,201);
         else:
             return response()->json('Something went wrong!', 500);
         endif;

@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function ()
 {
     // auth
-    Route::middleware('guest')->prefix('users')->group(function (){
+    Route::middleware('guest')->group(function (){
         Route::post('/register',               [StoreUserController::class, 'register'])->name('register');
         Route::post('/login',                  [AuthController::class, 'login'])->name('login');
     });
@@ -40,22 +40,25 @@ Route::prefix('v1')->group(function ()
             Route::delete('/{id}',              [DestroyProjectController::class, 'destroy'])->name('project.destroy');
 
             Route::get('/{id}/author',          [GetAuthorByProjectIdController::class, 'getAuthor'])->name('project.author');
-            Route::get('/{id}/archive',         [ArchiveProjectByIdController::class, 'archive'])->name('project.archive');
-            Route::get('/{id}/unarchived',      [UnarchivedProjectByIdController::class, 'unarchived'])->name('project.unarchived');
+            Route::patch('/{id}/archive',       [ArchiveProjectByIdController::class, 'archive'])->name('project.archive');
+            Route::patch('/{id}/unarchived',    [UnarchivedProjectByIdController::class, 'unarchived'])->name('project.unarchived');
         });
 
         // users
         Route::prefix('users')->group(function (){
             Route::get('/',                     [GetUsersController::class, 'index'])->name('users.index');
+            Route::post('/',                    [StoreUserController::class, 'register'])->name('users.store');
 
             Route::get('/{id}',                 [FindUserByIdController::class, 'show'])->name('author.show');
             Route::put('/{id}',                 [UpdateUserController::class, 'update'])->name('author.update');
             Route::delete('/{id}',              [DestroyUserController::class, 'destroy'])->name('author.destroy');
-            Route::delete('/{id}/logout',       [AuthController::class, 'logout'])->name('logout');
 
             Route::get('/{id}/projects',        [GetProjectsByUserIdController::class, 'getProjects'])->name('author.projects');
             Route::patch('/{id}/grant',         [EnableUserByIdController::class, 'activate'])->name('author.granted');
             Route::patch('/{id}/revoke',        [DisableUserByIdController::class, 'deactivate'])->name('author.revoked');
         });
+
+        // logout
+        Route::delete('/logout',                    [AuthController::class, 'logout'])->name('logout');
     });
 });

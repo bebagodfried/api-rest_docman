@@ -27,8 +27,8 @@ class GetUserResource extends JsonResource
             'full name' => $this->full_name,
             'email'     => $this->email,
             'is active' => ($this->activated ? 'yes' : 'no'),
-            'created at'=> $this->created_at,
-            'updated at'=> $this->updated_at
+            'created_at'=> $this->created_at,
+            'updated_at'=> $this->updated_at
         ];
     }
 }

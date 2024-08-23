@@ -20,8 +20,8 @@ class GetProjectDateResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'start date'=> $this->start_date,
-            'end date'  => $this->end_date ?? 'not defined'
+            'start_date'=> $this->start_date,
+            'end_date'  => $this->end_date ?? 'not defined'
         ];
     }
 }

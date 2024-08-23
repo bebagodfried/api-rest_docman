@@ -35,7 +35,6 @@ class StoreProjectResource extends JsonResource
             'label'     => $this->label,
             'client'    => $this->client,
             'start_date'=> $this->start_date,
-            'link'      =>route('project.show', $this->id),
         ];
 
         // has end_date
@@ -45,6 +44,9 @@ class StoreProjectResource extends JsonResource
 
         // is archived
         $project['archived'] = $status;
+
+        // link to project
+        $project['link'] = route('project.show', $this->id);
 
         return $project;
     }
