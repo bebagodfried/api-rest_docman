@@ -27,11 +27,11 @@ class GetArchivedDocumentResource extends JsonResource
     {
         return [
             'id'        => $this->id,
-            'label'     => $this->label,
-            'client'    => $this->client,
+            'name'      => $this->name,
+            'project'   => $this->project->label,
             'link'      => route('document.show', $this->id),
-            'timeline'  => new GetDocumentDateResource($request),
             'author'    => new GetDocumentAuthorResource($this->author),
+            'timeline'  => new GetDocumentDateResource($this),
         ];
     }
 }
