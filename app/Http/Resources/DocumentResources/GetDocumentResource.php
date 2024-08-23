@@ -9,10 +9,10 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $id
  * @property mixed $name
  * @property mixed $author
- * @property mixed $archived
+ * @property mixed $path
  * @property mixed $project
- * @property mixed $created_at
- * @property mixed $updated_at
+ * @property mixed $link
+ * @property mixed $archived
  */
 
 class GetDocumentResource extends JsonResource
@@ -37,6 +37,7 @@ class GetDocumentResource extends JsonResource
             'name'      => $this->name,
             'project'   => $this->project->label,
             'link'      => route('document.show', $this->id),
+            'path'      => $this->path,
             'archived'  => $status,
             'author'    => new GetDocumentAuthorResource($this->author),
             'timeline'  => new GetDocumentDateResource($this),

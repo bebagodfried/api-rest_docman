@@ -22,18 +22,11 @@ class History extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'User_id', 'id');
+        return $this->belongsTo(User::class, 'uid', 'id');
     }
 
     public function document(): BelongsTo
     {
         return $this->belongsTo(Document::class, 'document_id', 'id');
     }
-
-    public function project(): BelongsTo
-    {
-        return $this->belongsTo(Project::class, 'document_id', 'id');
-    }
-
-
 }
