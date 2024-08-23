@@ -7,12 +7,10 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @property mixed $id
- * @property mixed $label
- * @property mixed $client
- * @property mixed $start_date
- * @property mixed $end_date
- * @property mixed $archived
+ * @property mixed $name
  * @property mixed $author
+ * @property mixed $archived
+ * @property mixed $project
  * @property mixed $created_at
  * @property mixed $updated_at
  */
@@ -26,7 +24,9 @@ class GetDocumentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if($this->archived):
+        $archived = $this->archived;
+
+        if($archived):
             $status = 'yes';
         else:
             $status = 'no';
@@ -34,12 +34,12 @@ class GetDocumentResource extends JsonResource
 
         return [
             'id'        => $this->id,
-            'label'     => $this->label,
-            'client'    => $this->client,
+            'name'      => $this->name,
+            'project'   => $this->project->label,
             'link'      => route('document.show', $this->id),
             'archived'  => $status,
-            'timeline'  => new GetDocumentDateResource($request),
             'author'    => new GetDocumentAuthorResource($this->author),
+            'timeline'  => new GetDocumentDateResource($this),
         ];
     }
 }

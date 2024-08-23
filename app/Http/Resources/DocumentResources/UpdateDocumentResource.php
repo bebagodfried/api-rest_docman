@@ -7,14 +7,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @property mixed $id
- * @property mixed $label
- * @property mixed $client
- * @property mixed $start_date
- * @property mixed $end_date
+ * @property mixed $name
+ * @property mixed $author
  * @property mixed $archived
+ * @property mixed $project
+ * @property mixed $created_at
  * @property mixed $updated_at
  */
-
 class UpdateDocumentResource extends JsonResource
 {
     /**
@@ -32,21 +31,14 @@ class UpdateDocumentResource extends JsonResource
             $status = 'no';
         endif;
 
-        $document = [
+        return [
             'id'        => $this->id,
-            'label'     => $this->label,
-            'client'    => $this->client,
-            'start_date'=> $this->start_date,
+            'name'      => $this->name,
+            'project'   => $this->project->label,
+            'link'      => route('document.show', $this->id),
+            'archived'  => $status,
+            'author'    => new GetDocumentAuthorResource($this->author),
+            'timeline'  => new GetDocumentDateResource($this),
         ];
-
-        if($this->end_date):
-            $document['end_date'] = $this->end_date;
-        endif;
-
-        if($archived):
-            $document['archived'] = $status;
-        endif;
-
-        return $document;
     }
 }

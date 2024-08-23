@@ -25,11 +25,12 @@ class UpdateDocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'label'     => 'sometimes|required|string|max:255|unique:documents,label',
-            'client'    => 'sometimes|required|string|max:255',
-            'start_date'=> 'sometimes|required|date',
-            'end_date'  => 'sometimes|required|date',
-            'archived'  => 'sometimes|boolean'
+            'name'          => 'sometimes|required|string|max:255',
+            'file'          => 'sometimes|required|file|mimes:pdf,doc,docx,jpg,png|max:2048', // Validation du fichier
+            'author_id'     => 'sometimes|required|exists:users,id',
+            'project_id'    => 'sometimes|required|exists:projects,id',
+            'archived'      => 'sometimes|required|boolean',
+            'updater_id'    => 'sometimes|required|exists:users,id'
         ];
     }
 

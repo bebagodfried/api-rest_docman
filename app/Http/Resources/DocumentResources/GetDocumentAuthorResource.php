@@ -9,6 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $id
  * @property mixed $full_name
  * @property mixed $email
+ * @property mixed $author
  */
 class GetDocumentAuthorResource extends JsonResource
 {

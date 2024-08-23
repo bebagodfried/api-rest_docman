@@ -4,7 +4,9 @@ namespace App\Repositories;
 
 use App\Interfaces\DocumentRepositoryInterface;
 use App\Models\Document;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 
 class DocumentRepository implements DocumentRepositoryInterface
 {
@@ -32,16 +34,16 @@ class DocumentRepository implements DocumentRepositoryInterface
         return null;
     }
 
-    public function create(array $request): Document
+    public function upload(array $request): Document
     {
-        $document            = new Document();
-        $document->label     = $request['label'];
-        $document->client    = $request['client'];
-        $document->start_date= $request['start_date'];
-        $document->end_date  = $request['end_date'];
-        $document->archived  = $request['archived'];
+        $document               = new Document();
+        $document->name         = $request['name'];
+        $document->path         = $request['file_path'];
+        $document->archived     = $request['archived'];
 
         $document->author()->associate(auth()->user());
+        $document->project()->associate($request['project_id']);
+
         $document->save();
 
         return $document;

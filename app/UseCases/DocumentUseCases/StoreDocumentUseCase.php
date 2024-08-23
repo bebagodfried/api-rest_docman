@@ -15,6 +15,6 @@ class StoreDocumentUseCase
 
     public function execute(array $request)
     {
-        return $this->documentRepository->create($request);
+        return $this->documentRepository->upload($request);
     }
 }

@@ -7,7 +7,7 @@ interface DocumentRepositoryInterface
     // CRUD
     public function all();
     public function find($id);
-    public function create(array $request);
+    public function upload(array $request);
     public function update($id, array $request);
     public function delete($id);
 

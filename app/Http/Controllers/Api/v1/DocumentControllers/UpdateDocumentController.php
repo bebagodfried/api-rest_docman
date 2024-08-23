@@ -18,8 +18,9 @@ class UpdateDocumentController extends Controller
 
     public function update($id, UpdateDocumentRequest $request): JsonResponse
     {
-        $update = $request->validated();
-        $document   = $this->documentService->execute($id, $update);
+        $update                 = $request->validated();
+        $update['updater_id']   = auth()->id();
+        $document               = $this->documentService->execute($id, $update);
 
         if($document):
             $document = new UpdateDocumentResource($document);

@@ -25,11 +25,10 @@ class StoreDocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'label'     => 'required|string|max:255|unique:documents,label',
-            'client'    => 'required|string|max:255',
-            'start_date'=> 'required|date',
-            'end_date'  => 'sometimes|required|date',
-            'archived'  => 'boolean'
+            'name'          => 'required|string|max:255',
+            'file'          => 'required|file|mimes:pdf,doc,docx,jpg,png|max:2048', // Validation du fichier
+            'project_id'    => 'required|int|exists:projects,id',
+            'archived'      => 'boolean'
         ];
     }
 
