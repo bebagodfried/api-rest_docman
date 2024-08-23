@@ -31,7 +31,7 @@ class UpdateDocumentRequest extends FormRequest
             'project_id'    => 'sometimes|required|exists:projects,id',
             'archived'      => 'sometimes|required|boolean',
             'updater_id'    => 'sometimes|required|exists:users,id',
-            'commit'        => 'required|string',
+            'commit'        => 'required|string|unique:histories,commit',
         ];
     }
 

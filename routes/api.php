@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\v1\DocumentControllers\FindDocumentByIdController;
 use App\Http\Controllers\Api\v1\DocumentControllers\GetArchivedDocumentsController;
 use App\Http\Controllers\Api\v1\DocumentControllers\GetAuthorByDocumentIdController;
 use App\Http\Controllers\Api\v1\DocumentControllers\GetDocumentsController;
+use App\Http\Controllers\Api\v1\DocumentControllers\GetHistoryByDocumentIdController;
 use App\Http\Controllers\Api\v1\DocumentControllers\StoreDocumentController;
 use App\Http\Controllers\Api\v1\DocumentControllers\UnArchivedDocumentByIdController;
 use App\Http\Controllers\Api\v1\DocumentControllers\UpdateDocumentController;
@@ -52,7 +53,7 @@ Route::prefix('v1')->group(function ()
             Route::patch('/{id}/archive',       [ArchiveDocumentByIdController::class, 'archive'])->name('document.archive');
             Route::patch('/{id}/unarchived',    [UnarchivedDocumentByIdController::class, 'unarchived'])->name('document.unarchived');
 
-            Route::patch('/{id}/history',       [UnarchivedDocumentByIdController::class, 'history'])->name('document.histories');
+            Route::get('/{id}/history',         [GetHistoryByDocumentIdController::class, 'getHistories'])->name('document.histories');
         });
 
         // projects

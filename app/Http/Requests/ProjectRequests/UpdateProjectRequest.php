@@ -30,7 +30,7 @@ class UpdateProjectRequest extends FormRequest
             'start_date'=> 'sometimes|required|date',
             'end_date'  => 'sometimes|required|date',
             'archived'  => 'sometimes|boolean',
-            'commit'    => 'required|string',
+//            'commit'    => 'required|string',
         ];
     }
 
