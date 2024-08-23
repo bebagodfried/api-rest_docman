@@ -18,8 +18,8 @@ class UpdateProjectController extends Controller
 
     public function update($id, UpdateProjectRequest $request): JsonResponse
     {
-        $update = $request->validated();
-        $project   = $this->projectService->execute($id, $update);
+        $update     = $request->validated();
+        $project    = $this->projectService->execute($id, $update);
 
         if($project):
             $project = new UpdateProjectResource($project);

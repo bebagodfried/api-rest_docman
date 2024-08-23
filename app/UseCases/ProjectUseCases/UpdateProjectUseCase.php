@@ -3,6 +3,7 @@
 namespace App\UseCases\ProjectUseCases;
 
 use App\Interfaces\ProjectRepositoryInterface;
+use App\Models\History;
 
 class UpdateProjectUseCase
 {
@@ -15,6 +16,17 @@ class UpdateProjectUseCase
 
     public function execute($id, array $request)
     {
+        // history
+        $commit = $request['commit'];
+
+        $history            = new History();
+        $history->commit    = $commit;
+
+        $history->project()->associate($id);
+        $history->user()->associate(auth()->id());
+        $history->save();
+
+        // --
         $project = $request;
         return $this->projectRepository->update($id, $project);
     }

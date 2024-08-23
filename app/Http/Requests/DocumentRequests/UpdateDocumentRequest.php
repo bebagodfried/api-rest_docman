@@ -30,7 +30,8 @@ class UpdateDocumentRequest extends FormRequest
             'author_id'     => 'sometimes|required|exists:users,id',
             'project_id'    => 'sometimes|required|exists:projects,id',
             'archived'      => 'sometimes|required|boolean',
-            'updater_id'    => 'sometimes|required|exists:users,id'
+            'updater_id'    => 'sometimes|required|exists:users,id',
+            'commit'        => 'required|string',
         ];
     }
 

@@ -51,6 +51,8 @@ Route::prefix('v1')->group(function ()
             Route::get('/{id}/author',          [GetAuthorByDocumentIdController::class, 'getAuthor'])->name('document.author');
             Route::patch('/{id}/archive',       [ArchiveDocumentByIdController::class, 'archive'])->name('document.archive');
             Route::patch('/{id}/unarchived',    [UnarchivedDocumentByIdController::class, 'unarchived'])->name('document.unarchived');
+
+            Route::patch('/{id}/history',       [UnarchivedDocumentByIdController::class, 'history'])->name('document.histories');
         });
 
         // projects

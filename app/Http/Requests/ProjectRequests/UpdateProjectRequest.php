@@ -29,7 +29,8 @@ class UpdateProjectRequest extends FormRequest
             'client'    => 'sometimes|required|string|max:255',
             'start_date'=> 'sometimes|required|date',
             'end_date'  => 'sometimes|required|date',
-            'archived'  => 'sometimes|boolean'
+            'archived'  => 'sometimes|boolean',
+            'commit'    => 'required|string',
         ];
     }
 
