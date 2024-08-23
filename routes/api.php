@@ -1,5 +1,14 @@
 <?php
 
+use App\Http\Controllers\Api\v1\DocumentControllers\ArchiveDocumentByIdController;
+use App\Http\Controllers\Api\v1\DocumentControllers\DestroyDocumentController;
+use App\Http\Controllers\Api\v1\DocumentControllers\FindDocumentByIdController;
+use App\Http\Controllers\Api\v1\DocumentControllers\GetArchivedDocumentsController;
+use App\Http\Controllers\Api\v1\DocumentControllers\GetAuthorByDocumentIdController;
+use App\Http\Controllers\Api\v1\DocumentControllers\GetDocumentsController;
+use App\Http\Controllers\Api\v1\DocumentControllers\StoreDocumentController;
+use App\Http\Controllers\Api\v1\DocumentControllers\UnArchivedDocumentByIdController;
+use App\Http\Controllers\Api\v1\DocumentControllers\UpdateDocumentController;
 use App\Http\Controllers\Api\v1\ProjectControllers\ArchiveProjectByIdController;
 use App\Http\Controllers\Api\v1\ProjectControllers\DestroyProjectController;
 use App\Http\Controllers\Api\v1\ProjectControllers\FindProjectByIdController;
@@ -29,6 +38,21 @@ Route::prefix('v1')->group(function ()
     });
 
     Route::middleware('auth:sanctum')->group(function (){
+        // documents
+        Route::prefix('documents')->group(function () {
+            Route::get('/',                     [GetDocumentsController::class, 'index'])->name('documents.index');
+            Route::post('/',                    [StoreDocumentController::class, 'store'])->name('documents.store');
+            Route::get('/archived',             [GetArchivedDocumentsController::class, 'getArchived'])->name('documents.archived');
+
+            Route::get('/{id}',                 [FindDocumentByIdController::class, 'show'])->name('document.show');
+            Route::put('/{id}',                 [UpdateDocumentController::class, 'update'])->name('document.update');
+            Route::delete('/{id}',              [DestroyDocumentController::class, 'destroy'])->name('document.destroy');
+
+            Route::get('/{id}/author',          [GetAuthorByDocumentIdController::class, 'getAuthor'])->name('document.author');
+            Route::patch('/{id}/archive',       [ArchiveDocumentByIdController::class, 'archive'])->name('document.archive');
+            Route::patch('/{id}/unarchived',    [UnarchivedDocumentByIdController::class, 'unarchived'])->name('document.unarchived');
+        });
+
         // projects
         Route::prefix('projects')->group(function () {
             Route::get('/',                     [GetProjectsController::class, 'index'])->name('projects.index');
