@@ -25,7 +25,7 @@ class StoreDocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => 'required|string|max:255',
+            'name'          => 'required|string|max:255|unique:documents,name,path',
             'file'          => 'required|file|mimes:pdf,doc,docx,jpg,png|max:2048', // Validation du fichier
             'project_id'    => 'required|int|exists:projects,id',
             'archived'      => 'boolean'

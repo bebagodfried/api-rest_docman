@@ -4,7 +4,7 @@ namespace App\UseCases\HistoryUseCases;
 
 use App\Interfaces\HistoryRepositoryInterface;
 
-class GetAuthorByHistoryIdUseCase
+class GetHistoryByDocumentIdUseCase
 {
     protected HistoryRepositoryInterface $documentRepository;
 
@@ -15,10 +15,10 @@ class GetAuthorByHistoryIdUseCase
 
     public function execute($id)
     {
-        $document = $this->documentRepository->find($id);
+        $histories = $this->documentRepository->findByDocId($id);
 
-        if($document):
-            return $document->author;
+        if($histories):
+            return $histories;
         else:
             return null;
         endif;

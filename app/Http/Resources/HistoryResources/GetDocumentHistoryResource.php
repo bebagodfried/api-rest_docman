@@ -22,7 +22,7 @@ class GetDocumentHistoryResource extends JsonResource
         return [
             'id'        => $this->id,
             'name'      => $this->name,
-            'path'      => $this->path
+            'path'      => "$this->path"
         ];
     }
 }

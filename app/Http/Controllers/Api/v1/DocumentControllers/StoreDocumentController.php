@@ -28,14 +28,13 @@ class StoreDocumentController extends Controller
 
         // set document file
         $document       = $submitted['file'];
-        $documentPath   = "documents/{$clientName}/{$projectName}";
-        $documentName   = "{$document->getClientOriginalName()}";
+        $documentName   = str_replace(' ', '_',"{$document->getClientOriginalName()}");
+        $documentPath   = str_replace(' ', '_',"documents/$clientName/$projectName");
 
-        $filePath       = $request->file('file')->storeAs($documentPath, $documentName);
-        $filePath       = str_replace(' ', '_', $filePath);
+        $request->file('file')->storeAs("public/$documentPath", $documentName);
 
         $submitted['project_id']= $project->id;
-        $submitted['file_path'] = $filePath;
+        $submitted['file_path'] = "/$documentPath/$documentName";
         $submitted['archived']  = $submitted['archived'] ?? false;
 
         $document               = $this->documentService->execute($submitted);

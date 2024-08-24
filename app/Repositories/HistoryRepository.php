@@ -18,7 +18,7 @@ class HistoryRepository implements HistoryRepositoryInterface
     public function all(): Collection
     {
         $documents = $this->model;
-        return $documents::all();
+        return $documents::with('document', 'user')->get();
     }
 
     public function find($id): ?History
@@ -32,19 +32,20 @@ class HistoryRepository implements HistoryRepositoryInterface
         return null;
     }
 
-    public function create(array $request): History
+    public function findByDocId($id): ?Collection
     {
-        $document            = new History();
-        $document->label     = $request['label'];
-        $document->client    = $request['client'];
-        $document->start_date= $request['start_date'];
-        $document->end_date  = $request['end_date'];
-        $document->archived  = $request['archived'];
+        $histories = $this->model::with('document', 'user')->where('document_id', $id)->get();
 
-        $document->author()->associate(auth()->user());
-        $document->save();
+        if($histories):
+            return $histories;
+        endif;
 
-        return $document;
+        return null;
+    }
+
+    public function create(array $request)
+    {
+        //
     }
 
     public function update($id, array $request): ?History
@@ -54,43 +55,6 @@ class HistoryRepository implements HistoryRepositoryInterface
         if($document):
             $document->update($request);
             return $this->model::query()->find($id);
-        endif;
-
-        return null;
-    }
-
-    public function delete($id): bool
-    {
-        $document = $this->model::query()->find($id);
-
-        if($document):
-            return $document->delete();
-        endif;
-
-        return false;
-    }
-
-    public function archived($id): ?History
-    {
-        $document = $this->model::query()->find($id);
-
-        if($document):
-            $document->archived = true;
-            $document->save();
-            return $document;
-        endif;
-
-        return null;
-    }
-
-    public function unArchived($id)
-    {
-        $document = $this->model::query()->find($id);
-
-        if($document):
-            $document->archived = false;
-            $document->save();
-            return $document;
         endif;
 
         return null;

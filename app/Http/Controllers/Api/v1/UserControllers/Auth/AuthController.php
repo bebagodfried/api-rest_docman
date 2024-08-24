@@ -24,7 +24,7 @@ class AuthController extends Controller
         if($token && $token->activated):
             $token = $token->createToken('API Token');
             return response()->json(['token' => $token->plainTextToken ]);
-        elseif (!$token->activated):
+        elseif ($token && !$token->activated):
             return response()->json('User forbidden.', 403);
         else:
             return response()->json('The provided credentials are incorrect.', 401);

@@ -11,8 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed $author
  * @property mixed $archived
  * @property mixed $project
- * @property mixed $created_at
- * @property mixed $updated_at
+ * @property mixed $path
  */
 class StoreDocumentResource extends JsonResource
 {
@@ -36,6 +35,7 @@ class StoreDocumentResource extends JsonResource
             'name'      => $this->name,
             'project'   => $this->project->label,
             'link'      => route('document.show', $this->id),
+            'path'      => $this->path,
             'archived'  => $status
         ];
     }

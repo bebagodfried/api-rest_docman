@@ -21,7 +21,7 @@ class UnArchivedProjectByIdController extends Controller
         if($project):
             return response()->json("Project with id=$id unarchived successfully");
         else:
-            return response()->json("No project with id=$id here!", 404);
+            return response()->json("No project with id=$id here!", 400);
         endif;
     }
 }

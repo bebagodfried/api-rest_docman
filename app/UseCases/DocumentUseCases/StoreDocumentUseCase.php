@@ -3,6 +3,7 @@
 namespace App\UseCases\DocumentUseCases;
 
 use App\Interfaces\DocumentRepositoryInterface;
+use App\Models\History;
 
 class StoreDocumentUseCase
 {
@@ -15,6 +16,19 @@ class StoreDocumentUseCase
 
     public function execute(array $request)
     {
-        return $this->documentRepository->upload($request);
+        $document = $this->documentRepository->upload($request);
+
+        // history
+        $commit = $request['commit'] ?? "new document";
+
+        $history            = new History();
+        $history->commit    = $commit;
+
+        $history->document()->associate($document->id);
+        $history->user()->associate(auth()->id());
+        $history->save();
+
+        // --
+        return $document;
     }
 }

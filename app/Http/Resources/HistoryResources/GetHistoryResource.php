@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\HistoryResources;
 
-use App\Http\Resources\DocumentResources\GetDocumentResource;
+use App\Http\Resources\DocumentResources\GetDocumentAuthorResource;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -25,13 +25,13 @@ class GetHistoryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-//        dd($this);
         return [
             'id'        => $this->id,
             'uid'       => $this->uid,
             'document'  => new GetDocumentHistoryResource($this->document),
             'commit'    => $this->commit,
-            'date'      => Carbon::parse($this->created_at)->toDateTimeString()
+            'saved at'  => Carbon::parse($this->created_at)->toDateTimeString(),
+            'by'        => new GetDocumentAuthorResource($this->document->updater)
         ];
     }
 }
