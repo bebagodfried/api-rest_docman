@@ -1,0 +1,19 @@
+{
+    "swagger":"2.0",
+    "info": {
+        "description": "Collection for Document Management API including Users, Projects, and Documents. This API allows for user authentication, user management, project management, and document management with file upload capabilities.",
+        "version": "1.0",
+        "title": "API about eBusiness Afrique",
+        "termsOfService":"https://swagger.io/terms/",
+        "contact": {
+            "email": "dev@bebagodfried.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/license/MIT"
+        }
+    },
+    "paths": {
+
+    }
+}
