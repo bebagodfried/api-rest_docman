@@ -2,6 +2,8 @@
 
 namespace App\Interfaces;
 
+use Ramsey\Collection\Collection;
+
 interface HistoryRepositoryInterface
 {
     // CRUD

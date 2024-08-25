@@ -2,7 +2,6 @@
 
 namespace App\UseCases\HistoryUseCases;
 
-use App\Http\Resources\DocumentResources\GetDocumentResource;
 use App\Http\Resources\HistoryResources\GetHistoryResource;
 use App\Interfaces\HistoryRepositoryInterface;
 

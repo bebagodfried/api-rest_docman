@@ -4,9 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\DocumentRepositoryInterface;
 use App\Models\Document;
-use App\Models\Project;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\JsonResponse;
 
 class DocumentRepository implements DocumentRepositoryInterface
 {

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\v1\HistoryControllers;
 use App\Http\Controllers\Controller;
 use App\UseCases\HistoryUseCases\GetHistoriesUseCase;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class GetHistoriesController extends Controller
 {

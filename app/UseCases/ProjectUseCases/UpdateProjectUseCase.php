@@ -3,7 +3,6 @@
 namespace App\UseCases\ProjectUseCases;
 
 use App\Interfaces\ProjectRepositoryInterface;
-use App\Models\History;
 
 class UpdateProjectUseCase
 {

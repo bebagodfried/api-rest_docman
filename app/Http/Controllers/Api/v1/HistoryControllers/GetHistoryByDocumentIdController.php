@@ -19,7 +19,7 @@ class GetHistoryByDocumentIdController extends Controller
     {
         $historises = $this->getHistoryByDocumentIdUseCase->execute($id);
 
-        if($historises->count() >> 0):
+        if(isset($historises) && $historises->count() >> 0):
             $historises = GetHistoryResource::collection($historises);
             return response()->json($historises);
         else:

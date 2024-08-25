@@ -16,7 +16,7 @@ class GetHistoryByDocumentIdUseCase
 
     public function execute($id)
     {
-        $document = $this->documentRepository->findAll($id);
+        $document = $this->documentRepository->findByDocId($id);
 
         if($document):
             return $document;
