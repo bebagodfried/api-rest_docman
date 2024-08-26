@@ -22,7 +22,7 @@ class GetAuthorByProjectIdController
             $author = new GetProjectAuthorResource($author);
             return response()->json($author);
         else:
-            return response()->json("No project with id=$id here!", 400);
+            return response()->json("Bad request on project resources, please check and try again!", 400);
         endif;
     }
 }

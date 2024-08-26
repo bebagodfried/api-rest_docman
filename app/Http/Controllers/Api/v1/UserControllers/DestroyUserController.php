@@ -21,7 +21,7 @@ class DestroyUserController extends Controller
         if($delete):
             return response()->json("User with id=$id deleted successfully");
         else:
-            return response()->json("Bad request no user with id=$id!", 400);
+            return response()->json("Bad request on user resources, please check and try again!", 400);
         endif;
     }
 }

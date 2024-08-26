@@ -21,7 +21,7 @@ class GetProjectsByAuthorIdResource extends JsonResource
         return [
             'project id'    => $this->id,
             'label'         => $this->label,
-            'link'          => route('project.show', $this->id),
+            'profile'       => route('project.show', $this->id),
         ];
     }
 }

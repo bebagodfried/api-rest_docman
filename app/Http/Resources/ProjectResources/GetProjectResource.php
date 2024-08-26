@@ -26,18 +26,12 @@ class GetProjectResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if($this->archived):
-            $status = 'yes';
-        else:
-            $status = 'no';
-        endif;
-
         return [
             'id'        => $this->id,
             'label'     => $this->label,
             'client'    => $this->client,
             'link'      => route('project.show', $this->id),
-            'archived'  => $status,
+            'archived'  => ($this->archived)? 'yes' : 'no',
             'timeline'  => new GetProjectDateResource($this),
             'author'    => new GetProjectAuthorResource($this->author),
         ];

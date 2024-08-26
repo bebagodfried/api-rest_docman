@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\UserResources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,18 +24,13 @@ class UpdateUserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if($this->activated):
-            $status = 'active';
-        else:
-            $status = 'not active';
-        endif;
-
         return [
             'id'        => $this->id,
             'full name' => $this->full_name,
             'email'     => $this->email,
-            'status'    => $status,
-            'update at' => $this->updated_at
+            'profile'   => route('profile.show', $this->id),
+            'is active' => ($this->activated)? 'yes' : 'no',
+            'update at' => Carbon::parse($this->updated_at)->toDateTimeString()
         ];
     }
 }

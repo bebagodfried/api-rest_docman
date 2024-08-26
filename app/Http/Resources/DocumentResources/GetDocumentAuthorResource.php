@@ -23,7 +23,7 @@ class GetDocumentAuthorResource extends JsonResource
         return [
             'full_name' => $this->full_name,
             'email'     => $this->email,
-            'profile'   => route('author.show', $this->id),
+            'profile'   => route('profile.show', $this->id),
         ];
     }
 }

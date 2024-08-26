@@ -21,7 +21,7 @@ class DestroyProjectController extends Controller
         if($delete):
             return response()->json("Project with id=$id deleted successfully");
         else:
-            return response()->json("Bad request no project with id=$id!", 400);
+            return response()->json("Bad request on project resources, please check and try again!", 400);
         endif;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\UserResources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -26,9 +27,10 @@ class GetUserResource extends JsonResource
             'id'        => $this->id,
             'full name' => $this->full_name,
             'email'     => $this->email,
+            'profile'   => route('profile.show', $this->id),
             'is active' => ($this->activated ? 'yes' : 'no'),
-            'created_at'=> $this->created_at,
-            'updated_at'=> $this->updated_at
+            'created_at'=> Carbon::parse($this->created_at)->toDateTimeString(),
+            'updated_at'=> Carbon::parse($this->updated_at)->toDateTimeString(),
         ];
     }
 }

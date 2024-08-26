@@ -25,7 +25,7 @@ class UpdateUserController extends Controller
             $user = new UpdateUserResource($user);
             return response()->json($user);
         else:
-            return response()->json("Bad request no user with id=$id!", 400);
+            return response()->json("Bad request on user resources, please check and try again!", 400);
         endif;
     }
 }

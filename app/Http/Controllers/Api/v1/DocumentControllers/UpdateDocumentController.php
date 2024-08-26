@@ -26,7 +26,7 @@ class UpdateDocumentController extends Controller
             $document = new UpdateDocumentResource($document);
             return response()->json($document);
         else:
-            return response()->json("Bad request no document with id=$id!", 400);
+            return response()->json("Bad request on document resources, please check and try again!", 400);
         endif;
     }
 }

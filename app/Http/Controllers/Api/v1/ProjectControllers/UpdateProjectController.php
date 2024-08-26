@@ -25,7 +25,7 @@ class UpdateProjectController extends Controller
             $project = new UpdateProjectResource($project);
             return response()->json($project);
         else:
-            return response()->json("Bad request no project with id=$id!", 400);
+            return response()->json("Bad request on project resources, please check and try again!", 400);
         endif;
     }
 }

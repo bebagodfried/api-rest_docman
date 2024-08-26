@@ -32,72 +32,83 @@ use App\Http\Controllers\Api\v1\UserControllers\StoreUserController;
 use App\Http\Controllers\Api\v1\UserControllers\UpdateUserController;
 use Illuminate\Support\Facades\Route;
 
-try {
-    Route::prefix('v1')->group(function ()
-    {
-        // auth
-        Route::middleware('guest')->group(function (){
-            Route::post('/register',               [StoreUserController::class, 'register'])->name('register');
-            Route::post('/login',                  [AuthController::class, 'login'])->name('login');
-        });
 
-        Route::middleware('auth:sanctum')->group(function (){
-            // documents
-            Route::prefix('documents')->group(function () {
-                Route::get('/',                     [GetDocumentsController::class, 'index'])->name('documents.index');
-                Route::post('/',                    [StoreDocumentController::class, 'store'])->name('documents.store');
-                Route::get('/archived',             [GetArchivedDocumentsController::class, 'getArchived'])->name('documents.archived');
-
-                Route::get('/{id}',                 [FindDocumentByIdController::class, 'show'])->name('document.show');
-                Route::put('/{id}',                 [UpdateDocumentController::class, 'update'])->name('document.update');
-                Route::delete('/{id}',              [DestroyDocumentController::class, 'destroy'])->name('document.destroy');
-
-                Route::get('/{id}/author',          [GetAuthorByDocumentIdController::class, 'getAuthor'])->name('document.author');
-                Route::patch('/{id}/archive',       [ArchiveDocumentByIdController::class, 'archive'])->name('document.archive');
-                Route::patch('/{id}/unarchived',    [UnarchivedDocumentByIdController::class, 'unarchived'])->name('document.unarchived');
-
-                Route::get('/{id}/history',         [GetHistoryByDocumentIdController::class, 'getHistories'])->name('document.histories');
-            });
-
-            // histories
-            Route::prefix('history')->group(function () {
-                Route::get('/',                     [GetHistoriesController::class, 'index'])->name('history');
-                Route::get('/{id}',                 [FindHistoryByIdController::class, 'show'])->name('history.show');
-            });
-
-            // projects
-            Route::prefix('projects')->group(function () {
-                Route::get('/',                     [GetProjectsController::class, 'index'])->name('projects.index');
-                Route::post('/',                    [StoreProjectController::class, 'store'])->name('projects.store');
-                Route::get('/archived',             [GetArchivedProjectsController::class, 'getArchived'])->name('projects.archived');
-
-                Route::get('/{id}',                 [FindProjectByIdController::class, 'show'])->name('project.show');
-                Route::put('/{id}',                 [UpdateProjectController::class, 'update'])->name('project.update');
-                Route::delete('/{id}',              [DestroyProjectController::class, 'destroy'])->name('project.destroy');
-
-                Route::get('/{id}/author',          [GetAuthorByProjectIdController::class, 'getAuthor'])->name('project.author');
-                Route::patch('/{id}/archive',       [ArchiveProjectByIdController::class, 'archive'])->name('project.archive');
-                Route::patch('/{id}/unarchived',    [UnarchivedProjectByIdController::class, 'unarchived'])->name('project.unarchived');
-            });
-
-            // users
-            Route::prefix('users')->group(function (){
-                Route::get('/',                     [GetUsersController::class, 'index'])->name('users.index');
-                Route::post('/',                    [StoreUserController::class, 'register'])->name('users.store');
-
-                Route::get('/{id}',                 [FindUserByIdController::class, 'show'])->name('author.show');
-                Route::put('/{id}',                 [UpdateUserController::class, 'update'])->name('author.update');
-                Route::delete('/{id}',              [DestroyUserController::class, 'destroy'])->name('author.destroy');
-
-                Route::get('/{id}/projects',        [GetProjectsByUserIdController::class, 'getProjects'])->name('author.projects');
-                Route::patch('/{id}/grant',         [EnableUserByIdController::class, 'activate'])->name('author.granted');
-                Route::patch('/{id}/revoke',        [DisableUserByIdController::class, 'deactivate'])->name('author.revoked');
-            });
-
-            // logout
-            Route::delete('/logout',                    [AuthController::class, 'logout'])->name('logout');
-        });
+Route::prefix('v1')->group(function ()
+{
+    // auth
+    Route::middleware('guest')->group(function (){
+        Route::post('/register',                [StoreUserController::class, 'register'])->name('register');
+        Route::post('/login',                   [AuthController::class, 'login'])->name('login');
     });
-} catch (Exception $exception) {
-    return response()->json($exception, 500);
-}
+
+    Route::middleware('auth:sanctum')->group(function (){
+        // archived
+        Route::prefix('archived')->name('archived.')->group(function (){
+            Route::get('/documents',            [GetArchivedDocumentsController::class, 'getArchived'])->name('documents');
+            Route::get('/projects',             [GetArchivedProjectsController::class, 'getArchived'])->name('projects');
+        });
+
+        // documents
+        Route::prefix('documents')->name('documents.')->group(function () {
+            Route::get('/',                     [GetDocumentsController::class, 'index'])->name('index');
+            Route::post('/',                    [StoreDocumentController::class, 'store'])->name('store');
+        });
+
+        Route::prefix('document')->name('document.')->group(function () {
+            Route::get('/{id}',                 [FindDocumentByIdController::class, 'show'])->name('show');
+            Route::put('/{id}',                 [UpdateDocumentController::class, 'update'])->name('update');
+            Route::delete('/{id}',              [DestroyDocumentController::class, 'destroy'])->name('destroy');
+
+            Route::get('/{id}/author',          [GetAuthorByDocumentIdController::class, 'getAuthor'])->name('author');
+            Route::patch('/{id}/archive',       [ArchiveDocumentByIdController::class, 'archive'])->name('archive');
+            Route::patch('/{id}/unarchived',    [UnarchivedDocumentByIdController::class, 'unarchived'])->name('unarchived');
+
+            Route::get('/{id}/history',         [GetHistoryByDocumentIdController::class, 'getHistories'])->name('histories');
+        });
+
+        // histories
+        Route::prefix('history')->name('history.')->group(function () {
+            Route::get('/',                     [GetHistoriesController::class, 'index'])->name('index');
+            Route::get('/{id}',                 [FindHistoryByIdController::class, 'show'])->name('show');
+        });
+
+        // projects
+        Route::prefix('projects')->name('projects.')->group(function () {
+            Route::get('/',                     [GetProjectsController::class, 'index'])->name('index');
+            Route::post('/',                    [StoreProjectController::class, 'store'])->name('store');
+        });
+
+        Route::prefix('project')->name('project.')->group(function () {
+            Route::get('/{id}',                 [FindProjectByIdController::class, 'show'])->name('show');
+            Route::put('/{id}',                 [UpdateProjectController::class, 'update'])->name('update');
+            Route::delete('/{id}',              [DestroyProjectController::class, 'destroy'])->name('destroy');
+
+            Route::get('/{id}/author',          [GetAuthorByProjectIdController::class, 'getAuthor'])->name('author');
+            Route::patch('/{id}/archive',       [ArchiveProjectByIdController::class, 'archive'])->name('archive');
+            Route::patch('/{id}/unarchived',    [UnarchivedProjectByIdController::class, 'unarchived'])->name('unarchived');
+        });
+
+        // users
+        Route::prefix('users')->name('users.')->group(function () {
+            Route::get('/',                     [GetUsersController::class, 'index'])->name('index');
+            Route::post('/',                    [StoreUserController::class, 'register'])->name('store');
+        });
+
+        Route::prefix('user')->group(function (){
+            Route::name('profile.')->group(function () {
+                Route::get('/{id}',             [FindUserByIdController::class, 'show'])->name('show');
+                Route::put('/{id}',             [UpdateUserController::class, 'update'])->name('update');
+                Route::delete('/{id}',          [DestroyUserController::class, 'destroy'])->name('destroy');
+            });
+
+            Route::name('author.')->group(function () {
+                Route::get('/{id}/projects',    [GetProjectsByUserIdController::class, 'getProjects'])->name('projects');
+                Route::patch('/{id}/grant',     [EnableUserByIdController::class, 'activate'])->name('granted');
+                Route::patch('/{id}/revoke',    [DisableUserByIdController::class, 'deactivate'])->name('revoked');
+            });
+        });
+
+        // logout
+        Route::delete('/logout',                [AuthController::class, 'logout'])->name('logout');
+    });
+});

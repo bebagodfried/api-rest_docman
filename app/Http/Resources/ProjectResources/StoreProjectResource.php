@@ -24,12 +24,6 @@ class StoreProjectResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if($this->archived):
-            $status = 'yes';
-        else:
-            $status = 'no';
-        endif;
-
         $project = [
             'id'        => $this->id,
             'label'     => $this->label,
@@ -43,7 +37,7 @@ class StoreProjectResource extends JsonResource
         endif;
 
         // is archived
-        $project['archived'] = $status;
+        $project['archived'] = ($this->archived)? 'yes' : 'no';;
 
         // link to project
         $project['link'] = route('project.show', $this->id);
