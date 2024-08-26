@@ -27,7 +27,7 @@ class GetProjectsByUserIdController extends Controller
             return response()->json("User with id=$id has no project!", 204);
 
         else:
-            return response()->json("Bad request no user with id=$id!", 400);
+            return response()->json("Bad request on user resources, please check and try again!", 400);
         endif;
     }
 }

@@ -20,7 +20,7 @@ class EnableUserByIdController extends Controller
         if($user):
             return response()->json("User with id=$id activated successfully");
         else:
-            return response()->json("No user with id=$id here!", 404);
+            return response()->json("Bad request on user resources, please check and try again!", 400);
         endif;
     }
 }

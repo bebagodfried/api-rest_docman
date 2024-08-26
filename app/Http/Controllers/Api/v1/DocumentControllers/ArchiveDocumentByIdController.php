@@ -20,7 +20,7 @@ class ArchiveDocumentByIdController extends Controller
         if($document):
             return response()->json("Document with id=$id archived successfully");
         else:
-            return response()->json("No document with id=$id here!", 400);
+            return response()->json("Bad request on document resources, please check and try again!", 400);
         endif;
     }
 }

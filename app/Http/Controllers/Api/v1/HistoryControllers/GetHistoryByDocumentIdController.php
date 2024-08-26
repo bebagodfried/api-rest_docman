@@ -23,7 +23,7 @@ class GetHistoryByDocumentIdController extends Controller
             $historises = GetHistoryResource::collection($historises);
             return response()->json($historises);
         else:
-            return response()->json("Histories or document bad request, please check and try again", 400);
+            return response()->json("Histories or documents bad request, please check and try again", 400);
         endif;
     }
 }

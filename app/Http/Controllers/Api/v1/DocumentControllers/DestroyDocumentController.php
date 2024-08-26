@@ -21,7 +21,7 @@ class DestroyDocumentController extends Controller
         if($delete):
             return response()->json("Document with id=$id deleted successfully");
         else:
-            return response()->json("Bad request no document with id=$id!", 400);
+            return response()->json("Bad request on document resources, please check and try again!", 400);
         endif;
     }
 }

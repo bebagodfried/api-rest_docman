@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\ProjectResources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,28 +25,18 @@ class UpdateProjectResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $archived = $this->archived;
-
-        if($archived):
-            $status = 'yes';
-        else:
-            $status = 'no';
-        endif;
-
         $project = [
             'id'        => $this->id,
             'label'     => $this->label,
             'client'    => $this->client,
-            'start_date'=> $this->start_date,
+            'start_date'=> Carbon::parse($this->start_date)->toDateTimeString(),
         ];
 
         if($this->end_date):
             $project['end_date'] = $this->end_date;
         endif;
 
-        if($archived):
-            $project['archived'] = $status;
-        endif;
+        $project['archived'] = ($this->archived)? 'yes' : 'no';;
 
         return $project;
     }

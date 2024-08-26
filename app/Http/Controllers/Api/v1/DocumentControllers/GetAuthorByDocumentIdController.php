@@ -22,7 +22,7 @@ class GetAuthorByDocumentIdController
             $author = new GetDocumentAuthorResource($author);
             return response()->json($author);
         else:
-            return response()->json("No document with id=$id here!", 400);
+            return response()->json("Bad request on document resources, please check and try again!", 400);
         endif;
     }
 }
