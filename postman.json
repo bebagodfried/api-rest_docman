@@ -1,0 +1,4151 @@
+{
+	"info": {
+		"_postman_id": "f5f40eaa-0735-43cb-beeb-d4ec31dbcdac",
+		"name": "API about eBusiness Afrique",
+		"description": "As part of eBA's activities, here is a web application develop for the electronic management of documents related to these projects. API about eBusiness Afrique including: Users, Projects, Documents and Histories about documents.\n\nThis API allows for user authentication, user management, project management, and document management with file upload capabilities.\n\nGithub: [follow the project ](https://github.com/bebagodfried/api-rest_docman) by [@bebagodfried](https://github.com/bebagodfried)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37835435"
+	},
+	"item": [
+		{
+			"name": "Authorization",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Login successful', function() {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.have.jsonBody('token');",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@laravel.api\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/login",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: login successfully",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"admin@laravel.api\",\n    \"password\": \"password123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/login",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 18:21:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"1|kKHV6RXc2nbkcA7izOHTESFsantJDAbvwJhvFTFnc7b74c5a\"\n}"
+						},
+						{
+							"name": "Error: credentials are incorrect",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"admin@example.api\",\n    \"password\": \"password123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/login",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 18:28:03 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"The provided credentials are incorrect.\""
+						},
+						{
+							"name": "Error: login validation failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"adminlaravel.api\",\n    \"password\": \"password123\"\n}"
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/login",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 25 Aug 2024 17:51:22 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": [\n        \"The email field must be a valid email address.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('User created successfully', function() {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.have.jsonBody('id');",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"full_name\": \"admin\",\n    \"email\": \"admin@laravel.api\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/register",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: registered successfully",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"admin\",\n    \"email\": \"admin@laravel.api\",\n    \"password\": \"password123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/register",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 17:42:39 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"full name\": \"admin\",\n    \"email\": \"admin@laravel.api\",\n    \"profile\": \"http://localhost:8000/api/v1/user/1\",\n    \"is active\": \"yes\",\n    \"created_at\": \"2024-08-25 19:27:43\",\n    \"updated_at\": \"2024-08-25 19:27:43\"\n}"
+						},
+						{
+							"name": "Error: invalid fields",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"\",\n    \"email\": \"admin@example.api\",\n    \"password\": \"0000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/register",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 18:17:52 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"full_name\": [\n        \"The full name field is required.\"\n    ],\n    \"password\": [\n        \"The password field must be at least 8 characters.\"\n    ]\n}"
+						},
+						{
+							"name": "Error: required fields",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"\",\n    \"email\": \"\",\n    \"password\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/register",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 18:18:55 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"full_name\": [\n        \"The full name field is required.\"\n    ],\n    \"email\": [\n        \"The email field is required.\"\n    ],\n    \"password\": [\n        \"The password field is required.\"\n    ]\n}"
+						},
+						{
+							"name": "Error: fields values already taken",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"admin\",\n    \"email\": \"admin@laravel.api\",\n    \"password\": \"password123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/register",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 18:19:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"full_name\": [\n        \"The full name has already been taken.\"\n    ],\n    \"email\": [\n        \"The email has already been taken.\"\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "The **authorization** process determining whether an authenticated user has permission to perform a specific action or access a resource."
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status is 200', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/users",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: get all users with success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/users",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 25 Aug 2024 18:47:36 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"full name\": \"admin\",\n        \"email\": \"admin@laravel.api\",\n        \"profile\": \"http://localhost:8000/api/v1/user/1\",\n        \"is active\": \"yes\",\n        \"created_at\": \"2024-08-25 19:27:43\",\n        \"updated_at\": \"2024-08-25 19:27:43\"\n    },\n    {\n        \"id\": 2,\n        \"full name\": \"John Doe\",\n        \"email\": \"doe@laravel.api\",\n        \"profile\": \"http://localhost:8000/api/v1/user/2\",\n        \"is active\": \"yes\",\n        \"created_at\": \"2024-08-25 19:35:42\",\n        \"updated_at\": \"2024-08-25 19:35:42\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('User created successfully', function() {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.have.jsonBody('id');",
+									"});",
+									"var template = `",
+									"<style type=\"text/css\">",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+									"    .tftable tr {background-color:#ffffff;}",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+									"    .tftable tr:hover {background-color:#e0ffff;}",
+									"</style>",
+									"",
+									"<table class=\"tftable\" border=\"1\">",
+									"    <tr>",
+									"        <th>ID</th>",
+									"        <th>Full Name</th>",
+									"        <th>Email</th>",
+									"        <th>Status</th>",
+									"        <th>Created At</th>",
+									"    </tr>",
+									"",
+									"    <tr>",
+									"        <td>{{response.id}}</td>",
+									"        <td>{{response.full name}}</td>",
+									"        <td>{{response.email}}</td>",
+									"        <td>{{response.status}}</td>",
+									"        <td>{{response.created_at}}</td>",
+									"    </tr>",
+									"</table>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return {response: pm.response.json()}",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());",
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"full_name\": \"John Doe\",\n    \"email\": \"doe@laravel.api\",\n    \"password\": \"00000000\"\n}"
+						},
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/users",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: created a user with success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"John Doe\",\n    \"email\": \"doe@laravel.api\",\n    \"password\": \"00000000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/users",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 18:34:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"full name\": \"John Doe\",\n    \"email\": \"doe@laravel.api\",\n    \"profile\": \"http://localhost:8000/api/v1/user/2\",\n    \"is active\": \"yes\",\n    \"created_at\": \"2024-08-25 19:35:42\"\n}"
+						},
+						{
+							"name": "Error: registration validation failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"John Doe\",\n    \"email\": \"doelaravel.api\",\n    \"password\": \"0000000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/users",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 18:37:53 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"full_name\": [\n        \"The full name has already been taken.\"\n    ],\n    \"email\": [\n        \"The email field must be a valid email address.\"\n    ],\n    \"password\": [\n        \"The password field must be at least 8 characters.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status is 200', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/user/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: successfully found a user by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/user/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"user",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 25 Aug 2024 18:57:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"full name\": \"admin\",\n    \"email\": \"admin@laravel.api\",\n    \"profile\": \"http://localhost:8000/api/v1/user/1\",\n    \"is active\": \"yes\",\n    \"created_at\": \"2024-08-25 19:27:43\",\n    \"updated_at\": \"2024-08-25 19:27:43\"\n}"
+						},
+						{
+							"name": "Error: 404 Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/user/3",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"user",
+										"3"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 25 Aug 2024 19:00:53 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"No user with id=3 here!\""
+						}
+					]
+				},
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('User updated successfully', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"full_name\": \"Jane Doe\",\n    \"email\": \"jane@laravel.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/user/2",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: user updated successfully",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"Jane Doe\",\n    \"email\": \"jane@laravel.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/user/2",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"user",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 18:49:07 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"full name\": \"Jane Doe\",\n    \"email\": \"jane@laravel.com\",\n    \"profile\": \"http://localhost:8000/api/v1/user/2\",\n    \"is active\": \"yes\",\n    \"update at\": \"2024-08-25 19:42:38\"\n}"
+						},
+						{
+							"name": "Error: update validation failed",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"Jane Doe\",\n    \"email\": \"jane@laravel.com\"\n}"
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/user/2",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"user",
+										"2"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 25 Aug 2024 19:18:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"full_name\": [\n        \"The full name has already been taken.\"\n    ],\n    \"email\": [\n        \"The email has already been taken.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Grant User (activate = 1)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('User activated successfully', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/user/1/grant",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"user",
+								"1",
+								"grant"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: user activate with success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/user/1/grant",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"user",
+										"1",
+										"grant"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 18:53:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"User with id=1 activated successfully\""
+						},
+						{
+							"name": "Error: 400 Bad Request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/user/3/grant",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"user",
+										"3",
+										"grant"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 25 Aug 2024 19:45:19 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"No user with id=3 here!\""
+						}
+					]
+				},
+				{
+					"name": "Revoke User (activate = 0)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('User deactivated successfully', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/user/1/revoke",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"user",
+								"1",
+								"revoke"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: user deactivate with success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/user/2/revoke",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"user",
+										"2",
+										"revoke"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 18:57:29 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"User with id=2 deactivated successfully\""
+						},
+						{
+							"name": "Error: 400 Bad Request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/user/3/revoke",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"user",
+										"3",
+										"revoke"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 25 Aug 2024 19:48:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"No user with id=3 here!\""
+						}
+					]
+				}
+			],
+			"description": "Operation about Users"
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Get All Projects",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Response status is 200', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/projects",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"projects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: no project",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/projects",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"projects"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:01:25 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Success: get all projects with success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/projects",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"projects"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:21:19 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"label\": \"API Project\",\n        \"client\": \"eBA\",\n        \"link\": \"http://localhost:8000/api/v1/project/1\",\n        \"archived\": \"no\",\n        \"timeline\": {\n            \"start_date\": \"13-08-2024\",\n            \"end_date\": \"20-08-2024\"\n        },\n        \"author\": {\n            \"full_name\": \"admin\",\n            \"email\": \"admin@laravel.api\",\n            \"profile\": \"http://localhost:8000/api/v1/user/1\"\n        }\n    },\n    {\n        \"id\": 2,\n        \"label\": \"remove me\",\n        \"client\": \"null\",\n        \"link\": \"http://localhost:8000/api/v1/project/1\",\n        \"archived\": \"no\",\n        \"timeline\": {\n            \"start_date\": \"01-01-2000\",\n            \"end_date\": \"31-12-2000\"\n        },\n        \"author\": {\n            \"full_name\": \"admin\",\n            \"email\": \"admin@laravel.api\",\n            \"profile\": \"http://localhost:8000/api/v1/user/1\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Project created successfully', function() {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.have.jsonBody('id');",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"label\": \"API Project\", \n    \"client\": \"eBA\", \n    \"start_date\": \"13-08-2024\", \n    \"end_date\": \"20-08-2024\"\n}"
+						},
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/projects",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"projects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: project created with success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"label\": \"API about eBusiness Afrique\", \n    \"client\": \"eBA\", \n    \"start_date\": \"13-08-2024\", \n    \"end_date\": \"20-08-2024\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/projects",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"projects"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:03:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"label\": \"API about eBusiness Afrique\",\n    \"client\": \"eBA\",\n    \"start_date\": \"13-08-2024\",\n    \"end_date\": \"20-08-2024\",\n    \"archived\": \"no\",\n    \"link\": \"http://localhost:8000/api/v1/project/1\"\n}"
+						},
+						{
+							"name": "Error: project data validation failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"label\": \"API Project\", \n    \"client\": \"eBA\", \n    \"start_date\": \"13-082024\", \n    \"end_date\": \"20-08-2024\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/projects",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"projects"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:06:16 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"label\": [\n        \"The label has already been taken.\"\n    ],\n    \"start_date\": [\n        \"The start date field must be a valid date.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Project by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status is 200', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/project/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"project",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: successfuly found a project by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/project/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"project",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:07:39 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"label\": \"API Project\",\n    \"client\": \"eBA\",\n    \"link\": \"http://localhost:8000/api/v1/project/1\",\n    \"archived\": \"no\",\n    \"timeline\": {\n        \"start_date\": \"13-08-2024\",\n        \"end_date\": \"20-08-2024\"\n    },\n    \"author\": {\n        \"full_name\": \"admin\",\n        \"email\": \"admin@laravel.api\",\n        \"profile\": \"http://localhost:8000/api/v1/user/1\"\n    }\n}"
+						},
+						{
+							"name": "Error: 404 Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/project/3",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"project",
+										"3"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:20:02 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"No project with id=3 here!\""
+						}
+					]
+				},
+				{
+					"name": "Delete Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status is 200', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/project/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"project",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Error: 400 Bad Request",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/project/3",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"project",
+										"3"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:12:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"Bad request no project with id=3!\""
+						}
+					]
+				},
+				{
+					"name": "Update Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Project updated successfully', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"label\": \"API Project with laravel 11\",\n    \"end_date\": \"31-08-2024\"\n}"
+						},
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/project/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"project",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: project update with success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"label\": \"API Project with laravel 11\",\n    \"end_date\": \"31-08-2024\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/project/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"project",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:29:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"label\": \"API Project with laravel 11\",\n    \"client\": \"eBA\",\n    \"start_date\": \"13-08-2024\",\n    \"end_date\": \"31-08-2024\",\n    \"archived\": \"no\"\n}"
+						},
+						{
+							"name": "Error: update validation failed",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"label\": \"API Project with laravel 11\",\n    \"end_date\": \"31-08-2024\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/project/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"project",
+										"1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:32:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"label\": [\n        \"The label has already been taken.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Archive Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Project archived successfully', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/project/1/archive",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"project",
+								"1",
+								"archive"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: project archived with success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/project/1/archive",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"project",
+										"1",
+										"archive"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:34:39 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"Project with id=1 archived successfully\""
+						},
+						{
+							"name": "Error: 400 Bad Request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/project/3/archive",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"project",
+										"3",
+										"archive"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:37:46 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"No project with id=3 here!\""
+						}
+					]
+				},
+				{
+					"name": "UnArchive Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Project archived successfully', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/project/1/unarchived",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"project",
+								"1",
+								"unarchived"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: unarchived project with success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/project/1/unarchived",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"project",
+										"1",
+										"unarchived"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:41:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"Project with id=1 unarchived successfully\""
+						},
+						{
+							"name": "Error: 400 Bad Request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/project/3/unarchived",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"project",
+										"3",
+										"unarchived"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:44:36 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"No project with id=1 here!\""
+						}
+					]
+				},
+				{
+					"name": "Get Archived Projects",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Project archived successfully', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/project/archived",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"project",
+								"archived"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: no archived projects",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/archived/projects",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"archived",
+										"projects"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:45:41 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Success: get all archived projects with success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/archived/projects",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"archived",
+										"projects"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:50:39 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 2,\n        \"label\": \"remove me\",\n        \"client\": \"null\",\n        \"link\": \"http://localhost:8000/api/v1/project/1\",\n        \"timeline\": {\n            \"start_date\": \"01-01-2000\",\n            \"end_date\": \"31-12-2000\"\n        },\n        \"author\": {\n            \"full_name\": \"admin\",\n            \"email\": \"admin@laravel.api\",\n            \"profile\": \"http://localhost:8000/api/v1/user/1\"\n        }\n    }\n]"
+						}
+					]
+				}
+			],
+			"description": "Operation about Projects"
+		},
+		{
+			"name": "Documents",
+			"item": [
+				{
+					"name": "Get All Documents",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status is 200', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/documents",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"documents"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: no documents",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/documents",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"documents"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:52:11 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Success: get all documents with success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/documents",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"documents"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 25 Aug 2024 22:55:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Documentation projet API\",\n        \"project\": \"API Project with laravel 11\",\n        \"link\": \"http://localhost:8000/api/v1/document/1\",\n        \"path\": \"/documents/eBA/API_Project_with_laravel_11/diagram_class.jpg\",\n        \"archived\": \"no\",\n        \"author\": {\n            \"full_name\": \"admin\",\n            \"email\": \"admin@laravel.api\",\n            \"profile\": \"http://localhost:8000/api/v1/user/1\"\n        },\n        \"timeline\": {\n            \"created_at\": \"2024-08-25 22:51:35\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get All Archived Documents",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status is 200', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/archived/documents",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"archived",
+								"documents"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: no archived documents",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/archived/documents",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"archived",
+										"documents"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:52:53 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Get Document by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status is 200', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/document/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"document",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: successfully found a document by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/document/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"document",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:59:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Documentation projet API\",\n    \"project\": \"API Project with laravel 11\",\n    \"link\": \"http://localhost:8000/api/v1/document/1\",\n    \"path\": \"/documents/eBA/API_Project_with_laravel_11/diagram_class.jpg\",\n    \"archived\": \"no\",\n    \"author\": {\n        \"full_name\": \"admin\",\n        \"email\": \"admin@laravel.api\",\n        \"profile\": \"http://localhost:8000/api/v1/user/1\"\n    },\n    \"timeline\": {\n        \"created_at\": \"2024-08-24 19:55:30\"\n    }\n}"
+						},
+						{
+							"name": "404: Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/document/2",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"document",
+										"2"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:54:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"No document with id=1 here!\""
+						}
+					]
+				},
+				{
+					"name": "Create Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Document created successfully', function() {",
+									"    pm.response.to.have.status(201);",
+									"    pm.response.to.have.jsonBody('id');",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Documentation projet API",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "Public/lab/api/uml/diagram_class.jpg"
+								},
+								{
+									"key": "project_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/documents",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"documents"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: add document with success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Documentation projet API",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "Public/lab/eBA/laravel/api-rest/uml/diagram_class.jpg"
+										},
+										{
+											"key": "project_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/documents",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"documents"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:55:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"Documentation projet API\",\n    \"project\": \"API Project with laravel 11\",\n    \"link\": \"http://localhost:8000/api/v1/document/1\",\n    \"path\": \"/documents/eBA/API_Project_with_laravel_11/diagram_class.jpg\",\n    \"archived\": \"no\"\n}"
+						},
+						{
+							"name": "Error: document data validate with errors",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Documentation projet API",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "project_id",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/documents",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"documents"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 19:58:38 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": [\n        \"The name has already been taken.\"\n    ],\n    \"file\": [\n        \"The file field is required.\"\n    ],\n    \"project_id\": [\n        \"The project id field is required.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Archive  Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status is 200', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/document/1/archive",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"document",
+								"1",
+								"archive"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: document archived with success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/document/1/archive",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"document",
+										"1",
+										"archive"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 20:04:04 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"Document with id=1 archived successfully\""
+						},
+						{
+							"name": "Error: 400 Bad Request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/document/2/archive",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"document",
+										"2",
+										"archive"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 20:08:06 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"No document with id=1 here!\""
+						}
+					]
+				},
+				{
+					"name": "UnArchive  Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status is 200', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/document/1/unarchived",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"document",
+								"1",
+								"unarchived"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: unarchived document with success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/document/1/unarchived",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"document",
+										"1",
+										"unarchived"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 20:09:41 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"Document with id=1 unarchived successfully\""
+						},
+						{
+							"name": "Error: 400 Bad Request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/document/2/unarchived",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"document",
+										"2",
+										"unarchived"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 20:10:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"No document with id=1 here!\""
+						}
+					]
+				},
+				{
+					"name": "Update Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Document updated successfully', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"API Documentation\",\n    \"commit\": \"Juste made a modification on document name\"\n}\n"
+						},
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/document/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"document",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: document updated with success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"API Documentation\",\n    \"commit\": \"Juste made a modification on document name\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/document/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"document",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 20:13:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"name\": \"API Documentation\",\n    \"project\": \"API Project with laravel 11\",\n    \"link\": \"http://localhost:8000/api/v1/document/1\",\n    \"archived\": \"no\",\n    \"author\": {\n        \"full_name\": \"admin\",\n        \"email\": \"admin@laravel.api\",\n        \"profile\": \"http://localhost:8000/api/v1/user/1\"\n    },\n    \"timeline\": {\n        \"created_at\": \"2024-08-24 19:55:30\",\n        \"update_at\": \"2024-08-24 20:13:33\",\n        \"update by\": {\n            \"full_name\": \"admin\",\n            \"email\": \"admin@laravel.api\",\n            \"profile\": \"http://localhost:8000/api/v1/user/1\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Error: update validation failed",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"API Documentation\",\n    \"commit\": \"Juste made a modification on document name\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/document/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"document",
+										"1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 20:15:03 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": [\n        \"The name has already been taken.\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status is 200', function() {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/document/3",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"document",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Error: 400 Bad Request",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/document/3",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"document",
+										"3"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 20:19:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"Bad request no document with id=1!\""
+						}
+					]
+				}
+			],
+			"description": "Operation about Documents"
+		},
+		{
+			"name": "Histories",
+			"item": [
+				{
+					"name": "Get All Histories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/history",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"history"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: get all histories about documents",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/history",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"history"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 20:22:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"uid\": 1,\n        \"document\": {\n            \"id\": 1,\n            \"name\": \"Documentation projet API\",\n            \"path\": \"/documents/eBA/API_Project_with_laravel_11/diagram_class.jpg\"\n        },\n        \"commit\": \"new document\",\n        \"saved at\": \"2024-08-25 22:51:35\",\n        \"by\": {\n            \"full_name\": \"admin\",\n            \"email\": \"admin@laravel.api\",\n            \"profile\": \"http://localhost:8000/api/v1/user/1\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get History By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/history/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"history",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: get histories about a documents by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/history/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"history",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 20:24:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"uid\": 1,\n    \"document\": {\n        \"id\": 1,\n        \"name\": \"Documentation projet API\",\n        \"path\": \"/documents/eBA/API_Project_with_laravel_11/diagram_class.jpg\"\n    },\n    \"commit\": \"new document\",\n    \"saved at\": \"2024-08-25 22:51:35\",\n    \"by\": {\n        \"full_name\": \"admin\",\n        \"email\": \"admin@laravel.api\",\n        \"profile\": \"http://localhost:8000/api/v1/user/1\"\n    }\n}"
+						},
+						{
+							"name": "Error: 404 Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/history/3",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"history",
+										"3"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 20:26:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"No history with id=1 here!\""
+						}
+					]
+				},
+				{
+					"name": "Get History By Document ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/{{api_version}}/document/1/history",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"{{api_version}}",
+								"document",
+								"1",
+								"history"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success: successfully get histories by document ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/documents/1/history",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"documents",
+										"1",
+										"history"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 20:29:21 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"uid\": 1,\n        \"document\": {\n            \"id\": 1,\n            \"name\": \"Documentation projet API\",\n            \"path\": \"/documents/eBA/API_Project_with_laravel_11/diagram_class.jpg\"\n        },\n        \"commit\": \"new document\",\n        \"saved at\": \"2024-08-25 22:51:35\",\n        \"by\": {\n            \"full_name\": \"admin\",\n            \"email\": \"admin@laravel.api\",\n            \"profile\": \"http://localhost:8000/api/v1/user/1\"\n        }\n    }\n]"
+						},
+						{
+							"name": "Error: 400 Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/{{api_version}}/document/2/history",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"{{api_version}}",
+										"document",
+										"2",
+										"history"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 Aug 2024 20:48:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "\"Histories or document bad request, please check and try again\""
+						}
+					]
+				}
+			],
+			"description": "History views"
+		},
+		{
+			"name": "Exit",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/{{api_version}}/logout",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"{{api_version}}",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8000/",
+			"type": "string"
+		},
+		{
+			"key": "baseurl",
+			"value": "http://localhost:8000/api"
+		},
+		{
+			"key": "api_version",
+			"value": "v1"
+		},
+		{
+			"key": "token",
+			"value": "1|kKHV6RXc2nbkcA7izOHTESFsantJDAbvwJhvFTFnc7b74c5a",
+			"type": "string"
+		}
+	]
+}
